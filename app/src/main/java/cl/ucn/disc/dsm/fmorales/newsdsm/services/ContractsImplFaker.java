@@ -10,26 +10,33 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
+import com.github.javafaker.Faker;
+
+import org.threeten.bp.ZonedDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
-public class ContractsImpl implements Contracts {
+import static org.threeten.bp.ZoneOffset.UTC;
 
+public class ContractsImplFaker implements Contracts {
 
     final List<News> news = new ArrayList<>();
 
-    ContractsImpl(){
-        /*
+    /**
+     * Constructor
+     */
+    public ContractsImplFaker(){
+
         Faker faker = Faker.instance();
         for(int i = 0; i<5; i++){
-            News testNews = new News(Long.MIN_VALUE + i,faker.name().title(),faker.name().username(),faker.name().fullName(),faker.internet().url(),faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(),ZonedDateTime.now(UTC));
+
+            News testNews = new News(Long.MIN_VALUE + i,faker.name().title(),faker.name().username(),faker.name().fullName(),faker.internet().url(),faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(), ZonedDateTime.now(UTC));
+            save(testNews);
         }
-
-         */
     }
-
 
     /**
      * Get the list of news
@@ -40,41 +47,38 @@ public class ContractsImpl implements Contracts {
     @Override
     public List<News> retrieveNews(Integer size) {
 
-        //final List<News> news = new ArrayList<>();
 
-        // TODO: Add the faker news to the list
-
-     //   Faker faker = Faker.instance();
-      /*  for(int i = 0; i<5; i++){
-
-
-            News testNews = new News(Long.MIN_VALUE + i,faker.name().title(),faker.name().username(),faker.name().fullName(),faker.internet().url(),faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(),ZonedDateTime.now(UTC));
-
-            // log.debug("Name: {}",faker.name().fullName());
-            // FIXME: Remover
-            // System.out.println("Name: " + faker.name().fullName());
-            news.add(testNews);
-
-        }
-      */
-       /*
-        for(int i = 0; i<5; i++){
-            System.out.println(news.get(i).getAuthor() +" " + news.get(i).getPublishedAt());
-        }
-        */
-
-
-
-
-        return news;
+        return news.subList(news.size() - size,news.size());
     }
-
 
     public List<News> save(News ntc){
-       // news.add(ntc);
+
+        // Comprobacion para verificar si se ingreso o no un nuevo valor
+        System.out.println("List size before saving data: "+news.size());
+
+        //Comprobacion de que el valor no sea nulo
+        if(ntc == null){
+            System.out.println("No se puede ingresar una noticia vacia(NULL)");
+        }
+        else
+            {
+                //Comprobacion de que el valor se repite
+                for(int i =0;i < news.size() ; i++){
+                    if(news.get(i).getId() == ntc.getId()){
+                        System.out.println("Ya existe un valor con esta ID");
+                        return null;
+
+
+                    }
+                }
+                // Se agrega la nueva noticia
+            news.add(ntc);
+
+        }
+
+        // Comprobacion para verificar si se ingreso o no un nuevo valor
+        System.out.println("List size after saving data: "+news.size());
         return null;
     }
-
-
 
 }
