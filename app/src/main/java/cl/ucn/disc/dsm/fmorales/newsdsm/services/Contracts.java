@@ -25,4 +25,5 @@ public interface Contracts {
      * @return the list of news
      */
     List<News> retrieveNews(Integer size);
+    List<News> save(News ntc);
 }
