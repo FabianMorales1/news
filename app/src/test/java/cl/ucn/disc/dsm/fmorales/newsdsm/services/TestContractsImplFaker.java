@@ -31,13 +31,15 @@ public class TestContractsImplFaker {
 
     @Test
     public void testRetrieveNews(){
+
         log.debug("Testing...");
         Integer size = 2;
-        //the implementation
+
+        //La implementacion
         Contracts contracts = new ContractsImplFaker();
 
 
-        //Call the method
+        //LLamada al metodo
         List<News> news = contracts.retrieveNews(size);
 
         for(int i = 0; i<size; i++){
@@ -87,7 +89,10 @@ public class TestContractsImplFaker {
 
         //TEST NEW VALUE
         //Se crea una nueva noticia
-        News newNews = new News(Long.MIN_VALUE +  newsBefore.size() + 1,faker.name().title(),faker.name().username(),faker.name().fullName(),faker.internet().url(),faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(), ZonedDateTime.now(UTC));
+        News newNews = new News(faker.name().title(),
+                faker.name().username(),faker.name().fullName(),faker.internet().url(),
+                faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(),
+                ZonedDateTime.now(UTC));
 
         //Se guarda la nueva noticia
         List<News> news = contracts.save(newNews);

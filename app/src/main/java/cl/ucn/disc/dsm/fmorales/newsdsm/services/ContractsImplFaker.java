@@ -33,7 +33,11 @@ public class ContractsImplFaker implements Contracts {
         Faker faker = Faker.instance();
         for(int i = 0; i<5; i++){
 
-            News testNews = new News(Long.MIN_VALUE + i,faker.name().title(),faker.name().username(),faker.name().fullName(),faker.internet().url(),faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(), ZonedDateTime.now(UTC));
+            News testNews = new News(faker.name().title(),
+                    faker.name().username(),faker.name().fullName(),faker.internet().url(),
+                    faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(),
+                    ZonedDateTime.now(UTC));
+
             save(testNews);
         }
     }
@@ -47,7 +51,6 @@ public class ContractsImplFaker implements Contracts {
     @Override
     public List<News> retrieveNews(Integer size) {
 
-
         return news.subList(news.size() - size,news.size());
     }
 
@@ -57,12 +60,16 @@ public class ContractsImplFaker implements Contracts {
         System.out.println("List size before saving data: "+news.size());
 
         //Comprobacion de que el valor no sea nulo
-        if(ntc == null){
+        /* if(ntc == null){
             System.out.println("No se puede ingresar una noticia vacia(NULL)");
         }
+        */
+
+        /*
         else
             {
                 //Comprobacion de que el valor se repite
+
                 for(int i =0;i < news.size() ; i++){
                     if(news.get(i).getId() == ntc.getId()){
                         System.out.println("Ya existe un valor con esta ID");
@@ -71,10 +78,13 @@ public class ContractsImplFaker implements Contracts {
 
                     }
                 }
-                // Se agrega la nueva noticia
-            news.add(ntc);
 
-        }
+                */
+
+                // Se agrega la nueva noticia
+                news.add(ntc);
+
+        //}
 
         // Comprobacion para verificar si se ingreso o no un nuevo valor
         System.out.println("List size after saving data: "+news.size());
