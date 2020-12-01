@@ -19,6 +19,7 @@ import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
  * @author Fabian Morales Araya.
  */
 public interface Contracts {
+
     /**
      * Get the list of news
      * @param size size of the list
