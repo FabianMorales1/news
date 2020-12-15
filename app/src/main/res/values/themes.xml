@@ -18,9 +18,9 @@
 
     <!-- The Toolbar -->
     <style name = "Theme.NewsDSM.Toolbar" parent = "Widget.MaterialComponents.ActionBar.Primary">
-     <item name="android:background">@color/toolbarBackground</item>
-     <item name="titleTextColor">@color/toolbarTitleTextColor</item>
-     <item name="subtitleTextColor">@color/toolbarSubtitleTextColor</item>
+     <item name="android:background">@color/toolBarBackground</item>
+     <item name="titleTextColor">@color/toolBarTitleTextColor</item>
+     <item name="subtitleTextColor">@color/toolBarSubTitleTextColor</item>
      <item name="colorControlNormal">@color/windowBackground</item>
      <item name="android:colorControlNormal">@color/windowBackground</item>
      <item name="android:editTextColor">@color/white</item>
