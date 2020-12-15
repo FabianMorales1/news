@@ -22,6 +22,12 @@ import org.threeten.bp.ZonedDateTime;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.function.Function;
+
 
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
@@ -58,7 +64,7 @@ public final class ContractsImplNewsApi implements Contracts {
 // Warning message?
         boolean needFix = false;
 // Fix the author null : (
-        if (article.getAuthor() == null) {
+        if (article.getAuthor() == null || article.getAuthor().length() == 0 ) {
             article.setAuthor("No author*");
             needFix = true;
 
@@ -119,7 +125,10 @@ public final class ContractsImplNewsApi implements Contracts {
 
                 news.add(toNews(article));
             }
-            return news;
+            return news.stream().filter(distinctById(News::getId))
+                    .sorted((k1,k2) -> k2.getPublishedAt()
+                            .compareTo(k1.getPublishedAt()))
+                    .collect(Collectors.toList());
 
         } catch (IOException ex) {
             log.error("Error", ex);
@@ -127,6 +136,18 @@ public final class ContractsImplNewsApi implements Contracts {
         }
 
     }
+
+    /**
+     *  Filter the stream
+     * @param idExtractor
+     * @param <T>
+     * @return true if the news already exists.
+     */
+    private static <T>  Predicate<T> distinctById(Function<? super T, ?> idExtractor){
+        Map<Object, Boolean> seen = new ConcurrentHashMap<>();
+        return t -> seen.putIfAbsent(idExtractor.apply(t), Boolean.TRUE) == null;
+    }
+
 
     /**
      * Save one News into the System.

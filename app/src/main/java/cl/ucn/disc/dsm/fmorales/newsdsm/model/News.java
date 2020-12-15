@@ -119,11 +119,11 @@ public class News {
         this.publishedAt = publishedAt;
     }
 
-   /*
+
     public long getId() {
         return id;
     }
-    */
+
     public String getTitle() {
         return title;
     }
