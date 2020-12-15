@@ -1,23 +1,14 @@
 /*
  * Copyright (c) 2020 Fabian Morales Araya, fabian.morales@alumnos.ucn.cl
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
- *  associated documentation files (the "Software"), to deal in the Software without restriction,
- * including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
- * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
  *
- * The above copyright notice and this permission notice shall be included in all copies or
- * substantial portions of the Software.
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
- *  NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
- * NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
- * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package cl.ucn.disc.dsm.fmorales.newsdsm;
+package cl.ucn.disc.dsm.fmorales.newsdsm.activities;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,10 +27,10 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 //import cl.ucn.disc.dsm.fmorales.newsdsm.BuildConfig;
+import cl.ucn.disc.dsm.fmorales.newsdsm.R;
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 import cl.ucn.disc.dsm.fmorales.newsdsm.services.Contracts;
 import cl.ucn.disc.dsm.fmorales.newsdsm.services.ContractsImplNewsApi;
-import cl.ucn.disc.dsm.fmorales.newsdsm.activities.NewsItem;
 
 /**
  * The Main Class.
@@ -61,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // The toolbar
+        this.setSupportActionBar(findViewById(R.id.am_t_toolbar));
+
 // The FastAdapter
         ModelAdapter<News, NewsItem> newsAdapter = new ModelAdapter<>(NewsItem::new);
         FastAdapter<NewsItem> fastAdapter = FastAdapter.with(newsAdapter);
