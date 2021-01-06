@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateNewsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations for the news.
      *
      * @return void
      */
@@ -24,6 +24,7 @@ class CreateNewsTable extends Migration
                 $table->string("content");
                 $table->timestamp("published_at");
                 $table->timestamps();
+
         });
     }
 
