@@ -20,3 +20,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // News routes
 Route::resource('news', \App\Http\Controllers\NewsController::class);
+//route for the api
+Route::get('News/q={id:title}', 'App\Http\Controllers\NewsController@buscar');
+Route::get('News/pageSize={num}', 'App\Http\Controllers\NewsController@cantidad');
+Route::get('News/pageSize', 'App\Http\Controllers\NewsController@canti');
+Route::get('News/pageSize=', 'App\Http\Controllers\NewsController@canti');
