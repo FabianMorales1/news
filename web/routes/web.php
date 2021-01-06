@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//routes for create and store
+Route::get('News/Agregar', 'App\Http\Controllers\NewsController@create');
+Route::post('News/Agregar', 'App\Http\Controllers\NewsController@store');
