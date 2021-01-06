@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c7b77584-98b3-41c7-87a5-222399d1bb49" name="Default Changelist" comment="feat(Database): Added the platforms for the developments with laravel">
+    <list default="true" id="c7b77584-98b3-41c7-87a5-222399d1bb49" name="Default Changelist" comment="feat(Database):comment and rename">
+      <change afterPath="$PROJECT_DIR$/resources/views/NewsFormulario.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/News.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/News.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,8 +148,15 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.ConventionalCommit" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RunManager">
@@ -164,6 +175,12 @@
       <updated>1609224989276</updated>
       <workItem from="1609225005886" duration="2411000" />
       <workItem from="1609246486748" duration="1492000" />
+      <workItem from="1609967297165" duration="29000" />
+      <workItem from="1609967372221" duration="22000" />
+      <workItem from="1609967595226" duration="30000" />
+      <workItem from="1609967782515" duration="1529000" />
+      <workItem from="1609969676135" duration="86000" />
+      <workItem from="1609969890368" duration="3738000" />
     </task>
     <task id="LOCAL-00001" summary="feat(Database): Added the platforms for the developments with laravel">
       <created>1609247630818</created>
@@ -172,7 +189,28 @@
       <option name="project" value="LOCAL" />
       <updated>1609247630818</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="feat(Database):recreate the structure">
+      <created>1609973795529</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609973795529</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat(Database):comment and rename">
+      <created>1609973931881</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1609973931881</updated>
+    </task>
+    <task id="LOCAL-00004" summary="style(routes)routes for the api">
+      <created>1609974288464</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1609974288464</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,7 +221,24 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -192,6 +247,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="feat(Database): Added the platforms for the developments with laravel" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(Database): Added the platforms for the developments with laravel" />
+    <MESSAGE value="feat(Database):recreate the structure" />
+    <MESSAGE value="feat(Database):comment and rename" />
+    <MESSAGE value="style(routes)routes for the api" />
+    <option name="LAST_COMMIT_MESSAGE" value="style(routes)routes for the api" />
   </component>
 </project>
