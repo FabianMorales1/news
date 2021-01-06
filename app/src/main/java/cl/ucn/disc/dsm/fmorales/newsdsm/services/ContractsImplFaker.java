@@ -28,14 +28,14 @@ public class ContractsImplFaker implements Contracts {
     /**
      * Constructor
      */
-    public ContractsImplFaker(){
+    public ContractsImplFaker() {
 
         Faker faker = Faker.instance();
-        for(int i = 0; i<5; i++){
+        for (int i = 0; i < 5; i++) {
 
             News testNews = new News(faker.name().title(),
-                    faker.name().username(),faker.name().fullName(),faker.internet().url(),
-                    faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(),
+                    faker.name().username(), faker.name().fullName(), faker.internet().url(),
+                    faker.internet().url(), faker.lorem().toString(), faker.lorem().toString(),
                     ZonedDateTime.now(UTC));
 
             save(testNews);
@@ -51,13 +51,13 @@ public class ContractsImplFaker implements Contracts {
     @Override
     public List<News> retrieveNews(Integer size) {
 
-        return news.subList(news.size() - size,news.size());
+        return news.subList(news.size() - size, news.size());
     }
 
-    public List<News> save(News ntc){
+    public List<News> save(News ntc) {
 
         // Comprobacion para verificar si se ingreso o no un nuevo valor
-        System.out.println("List size before saving data: "+news.size());
+        System.out.println("List size before saving data: " + news.size());
 
         //Comprobacion de que el valor no sea nulo
         /* if(ntc == null){
@@ -81,13 +81,13 @@ public class ContractsImplFaker implements Contracts {
 
                 */
 
-                // Se agrega la nueva noticia
-                news.add(ntc);
+        // Se agrega la nueva noticia
+        news.add(ntc);
 
         //}
 
         // Comprobacion para verificar si se ingreso o no un nuevo valor
-        System.out.println("List size after saving data: "+news.size());
+        System.out.println("List size after saving data: " + news.size());
         return null;
     }
 
