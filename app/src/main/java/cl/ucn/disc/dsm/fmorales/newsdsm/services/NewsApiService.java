@@ -24,67 +24,72 @@ import java.util.Map;
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
 import retrofit2.Response;
 
- public final class NewsApiService {
-       	/**
-	* The Key.
-	*/
-       	private final String apiKey;
-        	/**
-	* The sub-service.
-*/
-       	private final APIService apiService;
-       	/**
- 	* The Constructor.
-	*
-	* @param apiKey to use.
-*/
-      	public NewsApiService(String apiKey) {
-  	Validation.notNull(apiKey, "apiKey");
-   	this.apiKey = apiKey;
-   	this.apiService = APIClient.getAPIService(); 	}
+public final class NewsApiService {
 
-       	/**
-	* The getTopHeadLines adaptor.
- *
-* @param category to search.
- * @return the List of Article.
-* @throws IOException in case of error.
- */
-        	public List<Article> getTopHeadlines(final String category, final Integer pageSize)
-                    throws IOException {
+    /**
+     * The Key.
+     */
+    private final String apiKey;
 
-       	Validation.notNull(category, "category");
-      	Validation.notNull(pageSize, "pageSize");
-      	if (pageSize < 1) {
-           throw new IllegalArgumentException("Error: pageSize need to be >0"); 	}
+    /**
+     * The sub-service.
+     */
+    private final APIService apiService;
 
-       	// TODO: Implements the correct map to request parameters.
-      	// https://newsapi.org/docs/endpoints/top-headlines
+    /**
+     * The Constructor.
+     *
+     * @param apiKey to use.
+     */
+    public NewsApiService(String apiKey) {
+        Validation.notNull(apiKey, "apiKey");
+        this.apiKey = apiKey;
+        this.apiService = APIClient.getAPIService();
+    }
 
-      	// The map of parameters.
-     	Map<String, String> query = new HashMap<>();
-    	query.put("apiKey", this.apiKey);
+    /**
+     * The getTopHeadLines adaptor.
+     *
+     * @param category to search.
+     * @return the List of Article.
+     * @throws IOException in case of error.
+     */
+    public List<Article> getTopHeadlines(final String category, final Integer pageSize)
+            throws IOException {
+
+        Validation.notNull(category, "category");
+        Validation.notNull(pageSize, "pageSize");
+
+        if (pageSize < 1) {
+            throw new IllegalArgumentException("Error: pageSize need to be >0");
+        }
+
+        // TODO: Implements the correct map to request parameters.
+        // https://newsapi.org/docs/endpoints/top-headlines
+
+        // The map of parameters.
+        Map<String, String> query = new HashMap<>();
+        query.put("apiKey", this.apiKey);
 
 
+        // query.put("country", topHeadlinesRequest.getCountry());
+        // query.put("language", topHeadlinesRequest.getLanguage());
+        query.put("category", category);
+        // query.put("sources", topHeadlinesRequest.getSources());
+        // query.put("q", topHeadlinesRequest.getQ());
+        query.put("pageSize", pageSize.toString());
+        // query.put("page", topHeadlinesRequest.getPage());
 
-     		// query.put("country", topHeadlinesRequest.getCountry());
-     		// query.put("language", topHeadlinesRequest.getLanguage());
-     		query.put("category", category);
-      		// query.put("sources", topHeadlinesRequest.getSources());
-    		// query.put("q", topHeadlinesRequest.getQ());
-    		query.put("pageSize", pageSize.toString());
-    		// query.put("page", topHeadlinesRequest.getPage());
+        // The response (sincronic!)
+        Response<ArticleResponse> response = apiService.getTopHeadlines(query).execute();
 
-  		// The response (sincronic!)
-   		Response<ArticleResponse> response = apiService.getTopHeadlines(query).execute();
+        // All ok, return the data
+        if (response.isSuccessful()) {
+            return response.body().getArticles();
+        }
 
-    		// All ok, return the data
-    		if (response.isSuccessful()) {
-      			return response.body().getArticles();
-     		}
+        throw new RuntimeException("Error: " + response.code() + " --> " + response.errorBody().string());
+    }
 
-     		throw new RuntimeException("Error: " + response.code() + " --> " + response.errorBody().string());
-	}
-
-      	}
+}
 

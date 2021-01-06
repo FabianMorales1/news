@@ -36,56 +36,62 @@ import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
 
 public final class ContractsImplNewsApi implements Contracts {
-      /**
-	* The logger.
-*/
-      	private static final Logger log = LoggerFactory.getLogger(ContractsImplNewsApi.class);
-      	/**
-	* The connection to NewsApi.
-	*/
-        	private final NewsApiService newsApiService;
-       	/**
- 52	* The Constructor.
- 53	*
- 54	* @param theApiKey to use.
- 55	*/
-       	public ContractsImplNewsApi(final String theApiKey) {
-   	Validation.minSize(theApiKey, 10, "ApiKey !!");
-  	this.newsApiService = new NewsApiService(theApiKey); }
 
-      	/**
-     64	* The Assembler/Transformer pattern!
-     65	*
-     66	* @param article used to source
-     67	* @return the News.
+    /**
+     * The logger.
+     **/
+    private static final Logger log = LoggerFactory.getLogger(ContractsImplNewsApi.class);
+
+    /**
+     * The connection to NewsApi.
+     */
+    private final NewsApiService newsApiService;
+
+    /**
+     * The Constructor.
+     *
+     * @param theApiKey to use.
+     */
+    public ContractsImplNewsApi(final String theApiKey) {
+        Validation.minSize(theApiKey, 10, "ApiKey !!");
+        this.newsApiService = new NewsApiService(theApiKey);
+    }
+
+    /**
+     * The Assembler/Transformer pattern!
+     *
+     * @param article used to source
+     * @return the News.
      */
     private static News toNews(final Article article) {
         Validation.notNull(article, "Article null !?!");
-// Warning message?
+
+        // Warning message?
         boolean needFix = false;
-// Fix the author null : (
-        if (article.getAuthor() == null || article.getAuthor().length() == 0 ) {
+
+        // Fix the author null
+        if (article.getAuthor() == null || article.getAuthor().length() == 0) {
             article.setAuthor("No author*");
             needFix = true;
 
 
         }
 
-        //	Fix more restrictions :(
-        if	(article.getDescription() == null || article.getDescription().length() == 0) {
+        //	Fix more restrictions
+        if (article.getDescription() == null || article.getDescription().length() == 0) {
             article.setDescription("No description*");
             needFix = true;
         }
 
         //	.. yes, warning message.
-        if	(needFix) {
+        if (needFix) {
             // Debug of Article
             log.warn("Article with invalid restrictions: {}.", ToStringBuilder.reflectionToString(
                     article, MULTI_LINE_STYLE
             ));
         }
 
-        // The date
+        // The Date
         ZonedDateTime publishedAt = ZonedDateTime
                 .parse(article.getPublishedAt())
                 .withZoneSameInstant(ZoneId.of("-3"));
@@ -126,7 +132,7 @@ public final class ContractsImplNewsApi implements Contracts {
                 news.add(toNews(article));
             }
             return news.stream().filter(distinctById(News::getId))
-                    .sorted((k1,k2) -> k2.getPublishedAt()
+                    .sorted((k1, k2) -> k2.getPublishedAt()
                             .compareTo(k1.getPublishedAt()))
                     .collect(Collectors.toList());
 
@@ -138,16 +144,16 @@ public final class ContractsImplNewsApi implements Contracts {
     }
 
     /**
-     *  Filter the stream
+     * Filter the stream
+     *
      * @param idExtractor
      * @param <T>
      * @return true if the news already exists.
      */
-    private static <T>  Predicate<T> distinctById(Function<? super T, ?> idExtractor){
+    private static <T> Predicate<T> distinctById(Function<? super T, ?> idExtractor) {
         Map<Object, Boolean> seen = new ConcurrentHashMap<>();
         return t -> seen.putIfAbsent(idExtractor.apply(t), Boolean.TRUE) == null;
     }
-
 
     /**
      * Save one News into the System.
@@ -155,7 +161,7 @@ public final class ContractsImplNewsApi implements Contracts {
      * @param news to save.
      */
     @Override
-    public List<News>  save(final News news) {
+    public List<News> save(final News news) {
         throw new NotImplementedException("Can't save in NewsAPI");
 
     }
