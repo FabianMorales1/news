@@ -32,18 +32,40 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        //return the view
+        return view('NewsFormulario');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created news
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request,[
+            'title' => 'required',
+            'author' => 'required',
+            'url' => 'required',
+            'url_image' => 'nullable',
+            'description' => 'required',
+            'content' => 'required',
+            'published_at' => 'required',
+        ]);
+        News::create([
+            'title' => $request->get('title'),
+            'author' => $request->get('author'),
+            'url' => $request->get('url'),
+            'url_image' => $request->get('url_image'),
+            'description' => $request->get('description'),
+            'content' => $request->get('content'),
+            'published_at' => $request->get('published_at')
+        ]);
+
+        return back()->with('mensaje','Haz agregado una Noticia');
+
     }
 
     /**
@@ -55,6 +77,48 @@ class NewsController extends Controller
     public function show($id)
     {
         //
+    }
+
+    /**
+     * search the news with the title
+     * @param News $id in these case is the title
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function buscar(news $id)
+    {
+        $newss = News::find($id,['title','author','url','url_image','description','content','published_at']);
+        return response()->json($newss,200);
+    }
+
+    /**
+     * return news if the number is correct
+     * @param $num number of the news to return
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\JsonResponse|\Illuminate\Http\Response
+     */
+    public function cantidad($num)
+    {
+
+        if($num < 101 && $num > 0){
+            $news = News::all(['title','author','url','url_image','description','content','published_at'])->take($num);
+            return response()->json($news,200);
+
+        }else{
+            return response([
+                'message' => 'Error the number is bad',
+            ],400);
+        }
+
+    }
+
+    /**
+     * return 20 news if you didnt give a number.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function canti()
+    {
+        $news = News::all(['title','author','url','url_image','description','content','published_at'])->take(20);
+        return response()->json($news,200);
     }
 
     /**
