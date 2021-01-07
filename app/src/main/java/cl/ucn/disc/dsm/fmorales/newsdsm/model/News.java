@@ -20,64 +20,82 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.model;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import net.openhft.hashing.LongHashFunction;
+
 import org.threeten.bp.ZonedDateTime;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
 
 /**
  * The domain model: News
+ *
  * @author Fabian Morales Araya
  */
+@Entity
 public class News {
 
     /**
      * Unique id
      */
-    final long id;
+    @PrimaryKey(autoGenerate = true)
+     long id;
 
     /**
      * The Title
      * Restrictions: not null, size > 2
      */
+    @ColumnInfo(name = "title")
     final String title;
 
     /**
      * The source
      */
+    @ColumnInfo(name = "source")
     final String source;
 
     /**
      * The Author
      */
+    @ColumnInfo(name = "author")
     final String author;
 
     /**
      * The url
      */
+    @ColumnInfo(name = "url")
     final String url;
 
     /**
      * The url of the image
      */
+    @ColumnInfo(name = "urlImage")
     final String urlImage;
 
     /**
      * The description
      */
+    @ColumnInfo(name = "description")
     final String description;
 
     /**
      * The content
      */
+    @ColumnInfo(name = "content")
     final String content;
 
     /**
      * The date of publish
      */
+    @ColumnInfo(name = "publishedAt")
     final ZonedDateTime publishedAt;
 
     /**
      * The constructor
+     *
      * @param title
      * @param source
      * @param author
@@ -91,19 +109,19 @@ public class News {
                 String description, String content, ZonedDateTime publishedAt) {
 
         // Validacion de title
-        Validation.minSize(title,2,"title");
+        Validation.minSize(title, 2, "title");
 
         // Validacion de source
-        Validation.minSize(source,2,"title");
+        Validation.minSize(source, 2, "title");
 
         // Validacion de author
-        Validation.minSize(author,2,"title");
+        Validation.minSize(author, 2, "title");
 
         // Validacion de content
-        Validation.notNull(content,"title");
+        Validation.notNull(content, "title");
 
         // Validacion de publishedAt
-        Validation.notNull(publishedAt,"title");
+        Validation.notNull(publishedAt, "title");
         this.id = LongHashFunction.xx().hashChars(title + "|" + source + "|" + author);
         this.title = title;
         this.source = source;
@@ -177,4 +195,9 @@ public class News {
     public ZonedDateTime getPublishedAt() {
         return publishedAt;
     }
+
+
 }
+
+
+
