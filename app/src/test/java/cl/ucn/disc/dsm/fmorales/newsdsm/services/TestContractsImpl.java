@@ -21,26 +21,30 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import com.github.javafaker.Faker;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
 /**
  * Testing of ContractImpl
- * @author Fabian Morales Araya
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public class TestContractsImpl {
 
+    /**
+     * The Logger
+     */
     private static final Logger log = LoggerFactory.getLogger(TestContractsImpl.class);
 
     @Test
     public void testRetrieveNews(){
+
+        /**
+         * The Test of Retrieve news.
+         */
         log.debug("Testing...");
 
         //the implementation
@@ -52,21 +56,34 @@ public class TestContractsImpl {
         Assertions.assertTrue(news.size() != 0,"empty list ?");
         Assertions.assertTrue(news.size() == 5,"list size != 5");
 
+        //debug to log
+        for (News n : news){
+            log.debug("News: {}", n);
+        }
+        log.debug("Done.");
+
+        // size = 0
+        Assertions.assertEquals(0,contracts.retrieveNews(0).size(), "List != 0");
+        // size = 3
+        Assertions.assertEquals(3,contracts.retrieveNews(3).size(), "List != 3");
+        // size = 10
+        Assertions.assertTrue(contracts.retrieveNews(10).size() <= 10, "List size != 10 :(");
         log.debug("Done.");
     }
 
+    /**
+     * Show the faker
+     */
     @Test
     public void testFaker(){
 
         //Build the Faker
         Faker faker = Faker.instance();
-
         for(int i = 0; i<5; i++){
             log.debug("Name: {}",faker.name().fullName());
             // FIXME: Remover
             System.out.println("Name: " + faker.name().fullName());
-
+            System.out.println("Cat: " + faker.cat().name());
         }
     }
-
 }
