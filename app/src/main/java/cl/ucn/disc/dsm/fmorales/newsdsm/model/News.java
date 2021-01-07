@@ -90,19 +90,19 @@ public class News {
     public News(String title, String source, String author, String url, String urlImage,
                 String description, String content, ZonedDateTime publishedAt) {
 
-        //Validacion de title
+        // Validacion de title
         Validation.minSize(title,2,"title");
 
-        //Validacion de source
+        // Validacion de source
         Validation.minSize(source,2,"title");
 
-        //Validacion de author
+        // Validacion de author
         Validation.minSize(author,2,"title");
 
-        //Validacion de content
+        // Validacion de content
         Validation.notNull(content,"title");
 
-        //Validacion de publishedAt
+        // Validacion de publishedAt
         Validation.notNull(publishedAt,"title");
         this.id = LongHashFunction.xx().hashChars(title + "|" + source + "|" + author);
         this.title = title;

@@ -137,12 +137,12 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //Check if the correct item was clicked
+        // Check if the correct item was clicked
         if (item.getItemId() == R.id.night_mode) {}
         // TODO: Get the night mode state of the app.
         int nightMode = AppCompatDelegate.getDefaultNightMode();
 
-        //Set the theme mode for the restarted activity
+        // Set the theme mode for the restarted activity
         if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         } else {

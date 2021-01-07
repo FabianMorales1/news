@@ -64,7 +64,7 @@ public class ContractsImplFaker implements Contracts {
      */
     @Override
     public List<News> retrieveNews(Integer size) {
-        //The last "size" elements.
+        // The last "size" elements.
         return news.subList(news.size() - size, news.size());
     }
 

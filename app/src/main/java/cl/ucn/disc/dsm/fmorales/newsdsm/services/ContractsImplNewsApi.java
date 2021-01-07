@@ -21,14 +21,12 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import com.kwabenaberko.newsapilib.models.Article;
-
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,14 +35,14 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.function.Function;
-
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
-
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
-
+/**
+ * The ContractsImplNewsApi Class
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte
+ */
 public final class ContractsImplNewsApi implements Contracts {
 
     /**
@@ -59,7 +57,6 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * The Constructor.
-     *
      * @param theApiKey to use.
      */
     public ContractsImplNewsApi(final String theApiKey) {
@@ -69,7 +66,6 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * The Assembler/Transformer pattern!
-     *
      * @param article used to source
      * @return the News.
      */
@@ -83,8 +79,6 @@ public final class ContractsImplNewsApi implements Contracts {
         if (article.getAuthor() == null || article.getAuthor().length() == 0) {
             article.setAuthor("No author*");
             needFix = true;
-
-
         }
 
         //	Fix more restrictions
@@ -117,12 +111,10 @@ public final class ContractsImplNewsApi implements Contracts {
                 article.getDescription(), // FIXME: Where is the content?
                 publishedAt
         );
-
     }
 
     /**
      * Get the list of News.
-     *
      * @param size of the list.
      * @return the List of News.
      */
@@ -138,7 +130,6 @@ public final class ContractsImplNewsApi implements Contracts {
             List<News> news = new ArrayList<>();
             for (Article article : articles) {
                 // log.debug("Article: {}", ToStringBuilder.reflectionToString(article, ToStringStyle.MULTI_LINE_STYLE));
-
                 news.add(toNews(article));
             }
             return news.stream().filter(distinctById(News::getId))
@@ -150,12 +141,10 @@ public final class ContractsImplNewsApi implements Contracts {
             log.error("Error", ex);
             return null;
         }
-
     }
 
     /**
      * Filter the stream
-     *
      * @param idExtractor
      * @param <T>
      * @return true if the news already exists.
@@ -167,13 +156,10 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * Save one News into the System.
-     *
      * @param news to save.
      */
     @Override
     public List<News> save(final News news) {
         throw new NotImplementedException("Can't save in NewsAPI");
-
     }
-
 }

@@ -47,7 +47,7 @@ public class ContractsImpl implements Contracts {
      */
     @Override
     public List<News> retrieveNews(final Integer size) {
-        //The last "size" elements.
+        // The last "size" elements.
         return news.subList(news.size() - size, news.size());
     }
 
@@ -57,7 +57,7 @@ public class ContractsImpl implements Contracts {
      */
     @Override
     public void saveNews (final News news){
-        //Fixme: Don't allow duplicated!!
+        // Fixme: Don't allow duplicated!!
         this.news.add(news);
     }
 
