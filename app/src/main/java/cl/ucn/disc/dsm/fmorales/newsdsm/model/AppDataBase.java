@@ -33,6 +33,9 @@ public abstract class AppDataBase extends RoomDatabase {
     public abstract NewsDao newsDao();
 }
 
+/**
+ * class used to allow the storage of ZonedDateTime values on the local database as a string
+ */
 class Converters {
 
     @TypeConverter
