@@ -20,22 +20,36 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.utils;
 
+/**
+ * The Validations.
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
+ */
 public class Validation {
 
+    /**
+     * Check the size.
+     * @param title to check.
+     * @param minSize to check.
+     * @param message to throw in case of wrong size.
+     */
     public static void minSize(String title, int minSize, String messsage){
 
-        notNull(title,messsage);
+        // Nullity
+        notNull(title, messsage);
         if(title.length() < minSize){
             throw  new IllegalArgumentException("Title was wrong size --> " + messsage);
         }
-
     }
 
+    /**
+     * Check nullity.
+     * @param value to check.
+     * @param message to throw in case of nullity.
+     */
     public static void notNull(Object value, String messsage){
 
         if(value == null){
             throw  new IllegalArgumentException("Title was null -->" + messsage );
         }
-
     }
 }
