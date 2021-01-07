@@ -20,20 +20,21 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
-
 import com.kwabenaberko.newsapilib.models.Article;
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 import com.kwabenaberko.newsapilib.network.APIClient;
 import com.kwabenaberko.newsapilib.network.APIService;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
 import retrofit2.Response;
 
+/**
+ * The NewApiService Class
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
+ */
 public final class NewsApiService {
 
     /**
@@ -48,7 +49,6 @@ public final class NewsApiService {
 
     /**
      * The Constructor.
-     *
      * @param apiKey to use.
      */
     public NewsApiService(String apiKey) {
@@ -59,7 +59,6 @@ public final class NewsApiService {
 
     /**
      * The getTopHeadLines adaptor.
-     *
      * @param category to search.
      * @return the List of Article.
      * @throws IOException in case of error.
@@ -69,7 +68,6 @@ public final class NewsApiService {
 
         Validation.notNull(category, "category");
         Validation.notNull(pageSize, "pageSize");
-
         if (pageSize < 1) {
             throw new IllegalArgumentException("Error: pageSize need to be >0");
         }
@@ -81,15 +79,15 @@ public final class NewsApiService {
         Map<String, String> query = new HashMap<>();
         query.put("apiKey", this.apiKey);
 
-
         // query.put("country", topHeadlinesRequest.getCountry());
         // query.put("language", topHeadlinesRequest.getLanguage());
         query.put("category", category);
+
         // query.put("sources", topHeadlinesRequest.getSources());
         // query.put("q", topHeadlinesRequest.getQ());
         query.put("pageSize", pageSize.toString());
-        // query.put("page", topHeadlinesRequest.getPage());
 
+        // query.put("page", topHeadlinesRequest.getPage());
         // The response (sincronic!)
         Response<ArticleResponse> response = apiService.getTopHeadlines(query).execute();
 
@@ -97,9 +95,7 @@ public final class NewsApiService {
         if (response.isSuccessful()) {
             return response.body().getArticles();
         }
-
         throw new RuntimeException("Error: " + response.code() + " --> " + response.errorBody().string());
     }
-
 }
 
