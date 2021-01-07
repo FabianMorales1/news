@@ -22,69 +22,52 @@ package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
+/**
+ * Class ContractsImpl
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
+ */
 public class ContractsImpl implements Contracts {
 
+    /**
+     * The Logger
+     */
+    private static final Logger log = LoggerFactory.getLogger(ContractsImpl.class);
 
-    final List<News> news = new ArrayList<>();
-
-    ContractsImpl(){
-        /*
-        Faker faker = Faker.instance();
-        for(int i = 0; i<5; i++){
-            News testNews = new News(Long.MIN_VALUE + i,faker.name().title(),faker.name().username(),faker.name().fullName(),faker.internet().url(),faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(),ZonedDateTime.now(UTC));
-        }
-
-         */
-    }
-
+    /**
+     * The list of news
+     */
+    private final List<News> news = new ArrayList<>();
 
     /**
      * Get the list of news
-     *
-     * @param size size of the list
-     * @return the list of news
+     * @param size size of the list.
+     * @return List of News
      */
     @Override
-    public List<News> retrieveNews(Integer size) {
-
-        //final List<News> news = new ArrayList<>();
-
-        // TODO: Add the faker news to the list
-
-     //   Faker faker = Faker.instance();
-      /*  for(int i = 0; i<5; i++){
-
-
-            News testNews = new News(Long.MIN_VALUE + i,faker.name().title(),faker.name().username(),faker.name().fullName(),faker.internet().url(),faker.internet().url(),faker.lorem().toString(),faker.lorem().toString(),ZonedDateTime.now(UTC));
-
-            // log.debug("Name: {}",faker.name().fullName());
-            // FIXME: Remover
-            // System.out.println("Name: " + faker.name().fullName());
-            news.add(testNews);
-
-        }
-      */
-       /*
-        for(int i = 0; i<5; i++){
-            System.out.println(news.get(i).getAuthor() +" " + news.get(i).getPublishedAt());
-        }
-        */
-
-
-
-
-        return news;
+    public List<News> retrieveNews(final Integer size) {
+        //The last "size" elements.
+        return news.subList(news.size() - size, news.size());
     }
 
+    /**
+     * Save one News into the System
+     * @param news to save
+     */
+    @Override
+    public void saveNews (final News news){
+        //Fixme: Don't allow duplicated!!
+        this.news.add(news);
+    }
 
+    /**
+     * Save the list of news
+     * @param ntc
+     * @return
+     */
     public List<News> save(News ntc){
-       // news.add(ntc);
+        // news.add(ntc);
         return null;
     }
-
-
-
 }
