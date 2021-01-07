@@ -59,17 +59,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         // The toolbar
         this.setSupportActionBar(findViewById(R.id.am_t_toolbar));
+
         // The FastAdapter
         ModelAdapter<News, NewsItem> newsAdapter = new ModelAdapter<>(NewsItem::new);
         FastAdapter<NewsItem> fastAdapter = FastAdapter.with(newsAdapter);
         fastAdapter.withSelectable(false);
+
         // The Recycler view
         RecyclerView recyclerView = findViewById(R.id.am_rv_news);
         recyclerView.setAdapter(fastAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
         // Get the news in the background thread
         AsyncTask.execute(() -> {
             // Using the contracts to get the news ..
@@ -106,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+
         // Change the label of the menu based on the state of the app.
         int nightMode = AppCompatDelegate.getDefaultNightMode();
         if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
@@ -136,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.night_mode) {}
         // TODO: Get the night mode state of the app.
         int nightMode = AppCompatDelegate.getDefaultNightMode();
+
         //Set the theme mode for the restarted activity
         if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);

@@ -84,6 +84,7 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
     @Override
     public void bindView(@NonNull ViewHolder holder, @NonNull List<Object> payloads) {
         super.bindView(holder, payloads);
+
         // Setting the holder
         holder.title.setText(getModel().getTitle());
         holder.author.setText(getModel().getAuthor());
@@ -115,7 +116,6 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
         protected TextView source;
         protected TextView description;
         protected TextView publishedAt;
-
         public ViewHolder(@NonNull View view) {
             super(view);
             this.title = view.findViewById(R.id.in_tv_title);

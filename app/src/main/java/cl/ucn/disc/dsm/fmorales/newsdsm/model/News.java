@@ -20,11 +20,8 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.model;
 
-
 import net.openhft.hashing.LongHashFunction;
-
 import org.threeten.bp.ZonedDateTime;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
 
 /**
@@ -102,15 +99,12 @@ public class News {
         //Validacion de author
         Validation.minSize(author,2,"title");
 
-
         //Validacion de content
         Validation.notNull(content,"title");
 
         //Validacion de publishedAt
         Validation.notNull(publishedAt,"title");
-
         this.id = LongHashFunction.xx().hashChars(title + "|" + source + "|" + author);
-
         this.title = title;
         this.source = source;
         this.author = author;
@@ -121,39 +115,65 @@ public class News {
         this.publishedAt = publishedAt;
     }
 
-
+    /**
+     * @return the id
+     */
     public long getId() {
         return id;
     }
 
+    /**
+     * @return the title
+     */
     public String getTitle() {
         return title;
     }
 
+    /**
+     * @return the source
+     */
     public String getSource() {
         return source;
     }
 
+    /**
+     * @return the author
+     */
     public String getAuthor() {
         return author;
     }
 
+    /**
+     * @return the url
+     */
     public String getUrl() {
         return url;
     }
 
+    /**
+     * @return the urlImage
+     */
     public String getUrlImage() {
         return urlImage;
     }
 
+    /**
+     * @return the description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @return the content
+     */
     public String getContent() {
         return content;
     }
 
+    /**
+     * @return the time tha publishedAt
+     */
     public ZonedDateTime getPublishedAt() {
         return publishedAt;
     }
