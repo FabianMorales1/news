@@ -21,12 +21,11 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import java.util.List;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
 /**
- *
- * @author Fabian Morales Araya.
+ * The Contracts from CU/UH.
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public interface Contracts {
 
@@ -36,5 +35,10 @@ public interface Contracts {
      * @return the list of news
      */
     List<News> retrieveNews(Integer size);
+
+    /**
+     * Save one News into the system.
+     * @param news to save
+     */
     List<News> save(News ntc);
 }
