@@ -24,22 +24,22 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
 import java.util.List;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
+/**
+ * Testing the contracts with NewsApi service
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
+ */
 public class TestContractsImplNewsApi {
-
 
     /**
      * The logger.
      */
     private static final Logger log = LoggerFactory.getLogger(TestContractsImplNewsApi.class);
+
     /**
      * The Test of retrieve news.
      */
@@ -63,11 +63,6 @@ public class TestContractsImplNewsApi {
         for (News n : news) {
             log.debug("News: {}.", ToStringBuilder.reflectionToString(n, ToStringStyle.MULTI_LINE_STYLE));
         }
-
         log.debug(".. end.");
     }
-
-
-
-
 }
