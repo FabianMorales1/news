@@ -21,57 +21,57 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import com.github.javafaker.Faker;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZonedDateTime;
-
 import java.util.List;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
-
 import static org.threeten.bp.ZoneOffset.UTC;
 
+/**
+ * Testing of ContractImplFaker
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
+ */
 public class TestContractsImplFaker {
 
+    /**
+     * The Logger
+     */
     private static final Logger log = LoggerFactory.getLogger(TestContractsImpl.class);
 
-
+    /**
+     * The Test of Retrieve news.
+     */
     @Test
     public void testRetrieveNews(){
 
+        /**
+         * The Test of Retrieve news.
+         */
         log.debug("Testing...");
         Integer size = 2;
 
-        //La implementacion
+        // La implementacion
         Contracts contracts = new ContractsImplFaker();
 
-
-        //LLamada al metodo
+        // LLamada al metodo
         List<News> news = contracts.retrieveNews(size);
 
         for(int i = 0; i<size; i++){
             System.out.println(news.get(i).getAuthor() +" " + news.get(i).getPublishedAt());
         }
-
-
         Assertions.assertNotNull(news,"List was null :(");
         Assertions.assertTrue(news.size() != 0,"empty list ?");
         Assertions.assertTrue(news.size() == size,"list size != 5");
 
-        /*
         // size = 0
         Assertions.assertEquals(0,contracts.retrieveNews(0).size(),"List != 0");
-
         // size = 3
         Assertions.assertEquals(3,contracts.retrieveNews(3).size(),"List != 3");
-
         // size = 10
         Assertions.assertTrue(contracts.retrieveNews(10).size() <= 10,"List != 10");
-        */
-
         log.debug("Done.");
     }
 
@@ -79,18 +79,14 @@ public class TestContractsImplFaker {
     public void testSaveNews(){
         log.debug("Testing...");
 
-        //Declaracion del faker
+        // Declaracion del faker
         Faker faker = Faker.instance();
 
-
-        //the implementation
+        // the implementation
         Contracts contracts = new ContractsImplFaker();
 
-        //Obtener lista inicial
+        // Obtener lista inicial
         List<News> newsBefore = contracts.retrieveNews(5);
-
-
-
 
         //Call the method
 
@@ -106,10 +102,22 @@ public class TestContractsImplFaker {
 
         //Se guarda la nueva noticia
         List<News> news = contracts.save(newNews);
-
-
         log.debug("Done.");
     }
 
+    /**
+     * Show the faker
+     */
+    @Test
+    public void testFaker(){
 
+        //build the faker
+        Faker faker = Faker.instance();
+        for (int i =0; i<10;i++){
+            log.debug("Name: {}", faker.name().fullName());
+            // FIXME: Remover
+            System.out.println("Name: " + faker.name().fullName());
+            System.out.println("Cat: " + faker.cat().name());
+        }
+    }
 }
