@@ -21,16 +21,17 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import com.kwabenaberko.newsapilib.models.Article;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Testing the News Api Services
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
+ */
 public class TestNewsApiServices {
 
     /**
@@ -52,17 +53,14 @@ public class TestNewsApiServices {
 
         log.debug("Good key ..");
         {
-// TODO: Add the real apikey
+            // TODO: Add the real apikey
             NewsApiService newsApiService = new NewsApiService("<USE REAL APIKEY>"); List<Article> articles = newsApiService.getTopHeadlines("general", 10); log.debug("Articles: {}.", articles);
             log.debug("Articles size: {}.", articles.size());
         }
 
         {
-// TODO: Add more testing to the backend
+            // TODO: Add more testing to the backend
         }
-
         log.debug(".. Done.");
-
     }
-
 }
