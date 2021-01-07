@@ -24,35 +24,28 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ModelAdapter;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.List;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.R;
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 import cl.ucn.disc.dsm.fmorales.newsdsm.services.Contracts;
 import cl.ucn.disc.dsm.fmorales.newsdsm.services.ContractsImplNewsApi;
 
-//import cl.ucn.disc.dsm.fmorales.newsdsm.BuildConfig;
-
 /**
  * The Main Class.
- *
- * @author Diego Urrutia-Astorga.
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public class MainActivity extends AppCompatActivity {
+
     /**
      * The Logger.
      */
@@ -60,33 +53,30 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * OnCreate.
-     *
      * @param savedInstanceState used to reload the app.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         // The toolbar
         this.setSupportActionBar(findViewById(R.id.am_t_toolbar));
-
-// The FastAdapter
+        // The FastAdapter
         ModelAdapter<News, NewsItem> newsAdapter = new ModelAdapter<>(NewsItem::new);
         FastAdapter<NewsItem> fastAdapter = FastAdapter.with(newsAdapter);
         fastAdapter.withSelectable(false);
-// The Recycler view
+        // The Recycler view
         RecyclerView recyclerView = findViewById(R.id.am_rv_news);
         recyclerView.setAdapter(fastAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-// Get the news in the background thread
+        // Get the news in the background thread
         AsyncTask.execute(() -> {
-// Using the contracts to get the news ..
+            // Using the contracts to get the news ..
             Contracts contracts = new ContractsImplNewsApi("ded30ff72b6a434caea6cd13ed35fda2");
-// Get the News from NewsApi (internet!)
+            // Get the News from NewsApi (internet!)
             List<News> listNews = contracts.retrieveNews(30);
-// Set the adapter!
+            // Set the adapter!
             runOnUiThread(() -> { newsAdapter.add(listNews);
             });
         });
@@ -95,23 +85,18 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Initialize the contents of the Activity's standard options menu.  You
      * should place your menu items in to <var>menu</var>.
-     *
      * <p>This is only called once, the first time the options menu is
      * displayed.  To update the menu every time it is displayed, see
      * {@link #onPrepareOptionsMenu}.
-     *
      * <p>The default implementation populates the menu with standard system
      * menu items.  These are placed in the {@link Menu#CATEGORY_SYSTEM} group so that
      * they will be correctly ordered with application-defined menu items.
      * Deriving classes should always call through to the base implementation.
-     *
      * <p>You can safely hold on to <var>menu</var> (and any items created
      * from it), making modifications to it as desired, until the next
      * time onCreateOptionsMenu() is called.
-     *
      * <p>When you add items to the menu, you can implement the Activity's
      * {@link #onOptionsItemSelected} method to handle them there.
-     *
      * @param menu The options menu in which you place your items.
      * @return You must return true for the menu to be displayed;
      * if you return false it will not be shown.
@@ -123,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         // Change the label of the menu based on the state of the app.
         int nightMode = AppCompatDelegate.getDefaultNightMode();
-        if(nightMode == AppCompatDelegate.MODE_NIGHT_YES){
+        if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
             menu.findItem(R.id.night_mode).setTitle(R.string.day_mode);
-        } else{
+        } else {
             menu.findItem(R.id.night_mode).setTitle(R.string.night_mode);
         }
         return true;
@@ -138,10 +123,8 @@ public class MainActivity extends AppCompatActivity {
      * its Handler as appropriate).  You can use this method for any items
      * for which you would like to do processing without those other
      * facilities.
-     *
      * <p>Derived classes should call through to the base class for it to
      * perform the default menu handling.</p>
-     *
      * @param item The menu item that was selected.
      * @return boolean Return false to allow normal menu processing to
      * proceed, true to consume it here.
@@ -150,16 +133,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         //Check if the correct item was clicked
-        if(item.getItemId()==R.id.night_mode){}
+        if (item.getItemId() == R.id.night_mode) {}
         // TODO: Get the night mode state of the app.
         int nightMode = AppCompatDelegate.getDefaultNightMode();
         //Set the theme mode for the restarted activity
         if (nightMode == AppCompatDelegate.MODE_NIGHT_YES) {
-            AppCompatDelegate.setDefaultNightMode
-                    (AppCompatDelegate.MODE_NIGHT_NO);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         } else {
-            AppCompatDelegate.setDefaultNightMode
-                    (AppCompatDelegate.MODE_NIGHT_YES);
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
         recreate();
         return true;
