@@ -21,84 +21,63 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import com.github.javafaker.Faker;
-
 import org.threeten.bp.ZonedDateTime;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
-
 import static org.threeten.bp.ZoneOffset.UTC;
 
+/**
+ * The Faker implementation of {@link Contracts}
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
+ */
 public class ContractsImplFaker implements Contracts {
 
+    /**
+     * The Logger
+     */
+    private static final Logger log = LoggerFactory.getLogger(ContractsImpl.class);
+
+    /**
+     * The list of news
+     */
     final List<News> news = new ArrayList<>();
 
     /**
      * Constructor
      */
     public ContractsImplFaker() {
-
         Faker faker = Faker.instance();
         for (int i = 0; i < 5; i++) {
-
             News testNews = new News(faker.name().title(),
                     faker.name().username(), faker.name().fullName(), faker.internet().url(),
                     faker.internet().url(), faker.lorem().toString(), faker.lorem().toString(),
                     ZonedDateTime.now(UTC));
-
             save(testNews);
         }
     }
 
     /**
      * Get the list of news
-     *
      * @param size size of the list
      * @return the list of news
      */
     @Override
     public List<News> retrieveNews(Integer size) {
-
+        //The last "size" elements.
         return news.subList(news.size() - size, news.size());
     }
 
+    /**
+     * Save one News into the System
+     * @param news to save
+     */
     public List<News> save(News ntc) {
-
-        // Comprobacion para verificar si se ingreso o no un nuevo valor
-        System.out.println("List size before saving data: " + news.size());
-
-        //Comprobacion de que el valor no sea nulo
-        /* if(ntc == null){
-            System.out.println("No se puede ingresar una noticia vacia(NULL)");
-        }
-        */
-
-        /*
-        else
-            {
-                //Comprobacion de que el valor se repite
-
-                for(int i =0;i < news.size() ; i++){
-                    if(news.get(i).getId() == ntc.getId()){
-                        System.out.println("Ya existe un valor con esta ID");
-                        return null;
-
-
-                    }
-                }
-
-                */
-
         // Se agrega la nueva noticia
         news.add(ntc);
-
-        //}
 
         // Comprobacion para verificar si se ingreso o no un nuevo valor
         System.out.println("List size after saving data: " + news.size());
         return null;
     }
-
 }
