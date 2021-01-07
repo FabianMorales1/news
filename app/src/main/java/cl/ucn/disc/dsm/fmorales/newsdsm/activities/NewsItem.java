@@ -29,22 +29,20 @@ import org.threeten.bp.format.DateTimeFormatter;
 import java.util.List;
 import cl.ucn.disc.dsm.fmorales.newsdsm.R;
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
+
 /**
  * The NewsItem to show in the list.
- *
- * @author Diego Urrutia-Astorga.
+ * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.ViewHolder> {
 
     /**
      * The ZonedDateTime formatter.
      */
-    private static final DateTimeFormatter FORMATTER =
-            DateTimeFormatter.ofPattern("HH:mm d.LLL.yyyy");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm d.LLL.yyyy");
 
     /**
      * The Constructor.
-     *
      * @param news to show.
      */
     public NewsItem(@NonNull News news) {
@@ -61,6 +59,10 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
         return new ViewHolder(view);
     }
 
+    /**
+     *  get the type of the news
+     * @return type of the news
+     */
     @Override
     public int getType() {
         return R.id.am_rv_news;
@@ -74,26 +76,24 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
         return R.layout.item_news;
     }
 
-/**
- * Bind the holder with the model.
- *
- * @param holder	to use.
- * @param payloads ?.
- */
-@Override
-public void bindView(@NonNull ViewHolder holder, @NonNull List<Object> payloads) {
-    super.bindView(holder, payloads);
-// Setting the holder
-    holder.title.setText(getModel().getTitle());
-    holder.author.setText(getModel().getAuthor());
-    holder.source.setText(getModel().getSource());
-    holder.description.setText(getModel().getDescription());
-    holder.publishedAt.setText(FORMATTER.format(getModel().getPublishedAt()));
-}
+    /**
+     * Bind the holder with the model.
+     * @param holder	to use.
+     * @param payloads ?.
+     */
+    @Override
+    public void bindView(@NonNull ViewHolder holder, @NonNull List<Object> payloads) {
+        super.bindView(holder, payloads);
+        // Setting the holder
+        holder.title.setText(getModel().getTitle());
+        holder.author.setText(getModel().getAuthor());
+        holder.source.setText(getModel().getSource());
+        holder.description.setText(getModel().getDescription());
+        holder.publishedAt.setText(FORMATTER.format(getModel().getPublishedAt()));
+    }
 
     /**
      * Clear the holder.
-     *
      * @param holder to clean.
      */
     @Override
@@ -124,7 +124,5 @@ public void bindView(@NonNull ViewHolder holder, @NonNull List<Object> payloads)
             this.description = view.findViewById(R.id.in_tv_description);
             this.publishedAt = view.findViewById(R.id.in_tv_published_at);
         }
-
     }
-
 }
