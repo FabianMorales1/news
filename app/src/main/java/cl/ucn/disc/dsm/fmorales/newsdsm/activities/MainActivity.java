@@ -20,28 +20,39 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.activities;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
+
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ModelAdapter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.util.List;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.R;
+import cl.ucn.disc.dsm.fmorales.newsdsm.model.AppDataBase;
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 import cl.ucn.disc.dsm.fmorales.newsdsm.services.Contracts;
 import cl.ucn.disc.dsm.fmorales.newsdsm.services.ContractsImplNewsApi;
 
 /**
  * The Main Class.
+ *
  * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public class MainActivity extends AppCompatActivity {
@@ -53,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * OnCreate.
+     *
      * @param savedInstanceState used to reload the app.
      */
     @Override
@@ -74,16 +86,60 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
+        // Create the local database to store the news
+        AppDataBase db = Room.databaseBuilder(getApplicationContext(),
+                AppDataBase.class, "localNewsDb").build();
+
+
         // Get the news in the background thread
+
         AsyncTask.execute(() -> {
-            // Using the contracts to get the news ..
-            Contracts contracts = new ContractsImplNewsApi("ded30ff72b6a434caea6cd13ed35fda2");
-            // Get the News from NewsApi (internet!)
-            List<News> listNews = contracts.retrieveNews(30);
-            // Set the adapter!
-            runOnUiThread(() -> { newsAdapter.add(listNews);
-            });
+
+            // If the app detects an internet connection
+            // Delete all the news stored on the local database so they are replaced for the new ones
+            if (isNetworkAvailable()) {
+                db.newsDao().deleteAll();
+
+
+                // Using the contracts to get the news ..
+                Contracts contracts = new ContractsImplNewsApi("ded30ff72b6a434caea6cd13ed35fda2");
+                // Get the News from NewsApi (internet!)
+                List<News> listNews = contracts.retrieveNews(30);
+
+                // Stores the news from the news api into the local database
+                for (int i = 0; i < 21; i++) {
+                    if (listNews.get(i) != null) {
+                        db.newsDao().insert(listNews.get(i));
+                    }
+                }
+
+                // Show the list of news from the internet
+                // Set the adapter!
+                runOnUiThread(() -> {
+                    newsAdapter.add(listNews);
+                });
+
+                // If the app doest detect an internet connection
+                // Show the list of news from the local database
+            } else {
+                Thread t = new Thread(() -> newsAdapter.add(db.newsDao().getAll()));
+                t.start();
+            }
+
         });
+
+    }
+
+    //Function that checks if there is an active internet connection or not
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        if (activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -101,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
      * time onCreateOptionsMenu() is called.
      * <p>When you add items to the menu, you can implement the Activity's
      * {@link #onOptionsItemSelected} method to handle them there.
+     *
      * @param menu The options menu in which you place your items.
      * @return You must return true for the menu to be displayed;
      * if you return false it will not be shown.
@@ -130,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
      * facilities.
      * <p>Derived classes should call through to the base class for it to
      * perform the default menu handling.</p>
+     *
      * @param item The menu item that was selected.
      * @return boolean Return false to allow normal menu processing to
      * proceed, true to consume it here.
@@ -138,7 +196,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Check if the correct item was clicked
-        if (item.getItemId() == R.id.night_mode) {}
+        if (item.getItemId() == R.id.night_mode) {
+        }
         // TODO: Get the night mode state of the app.
         int nightMode = AppCompatDelegate.getDefaultNightMode();
 
