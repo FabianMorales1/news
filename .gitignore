@@ -24,6 +24,7 @@
 /.idea/render.experimental.xml
 /.idea/jarRepositories.xml
 /.idea/compiler.xml
+/.web/composer.phar
 
 #Trashy
 .DS_Store
