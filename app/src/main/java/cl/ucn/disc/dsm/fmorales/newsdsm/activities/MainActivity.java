@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -90,9 +91,7 @@ public class MainActivity extends AppCompatActivity {
         AppDataBase db = Room.databaseBuilder(getApplicationContext(),
                 AppDataBase.class, "localNewsDb").build();
 
-
         // Get the news in the background thread
-
         AsyncTask.execute(() -> {
 
             // If the app detects an internet connection
@@ -125,12 +124,12 @@ public class MainActivity extends AppCompatActivity {
                 Thread t = new Thread(() -> newsAdapter.add(db.newsDao().getAll()));
                 t.start();
             }
-
         });
-
     }
 
-    //Function that checks if there is an active internet connection or not
+    /**
+     * Function that checks if there is an active internet connection or not
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
