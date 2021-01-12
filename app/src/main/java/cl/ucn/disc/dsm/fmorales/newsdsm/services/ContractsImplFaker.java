@@ -21,10 +21,16 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import com.github.javafaker.Faker;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZonedDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
+
 import static org.threeten.bp.ZoneOffset.UTC;
 
 /**

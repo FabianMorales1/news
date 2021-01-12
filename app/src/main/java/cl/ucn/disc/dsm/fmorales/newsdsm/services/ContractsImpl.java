@@ -20,12 +20,17 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
 /**
  * Class ContractsImpl
+ *
  * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public class ContractsImpl implements Contracts {
@@ -42,6 +47,7 @@ public class ContractsImpl implements Contracts {
 
     /**
      * Get the list of news
+     *
      * @param size size of the list.
      * @return List of News
      */
@@ -53,20 +59,23 @@ public class ContractsImpl implements Contracts {
 
     /**
      * Save one News into the System
+     *
      * @param news to save
      */
-    @Override
-    public void saveNews (final News news){
+    // @Override
+    public void saveNews(final News news) {
         // Fixme: Don't allow duplicated!!
         this.news.add(news);
+
     }
 
     /**
      * Save the list of news
+     *
      * @param ntc
      * @return
      */
-    public List<News> save(News ntc){
+    public List<News> save(News ntc) {
         // news.add(ntc);
         return null;
     }
