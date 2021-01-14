@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\News;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class NewsController extends Controller
 {
@@ -44,6 +45,8 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
+        $cosa = Carbon::now()->format('Y-m-d\TH:i:s.ZZZZZZ\Z');
+
 
         $this->validate($request,[
             'title' => 'required',
@@ -52,7 +55,7 @@ class NewsController extends Controller
             'url_image' => 'nullable',
             'description' => 'required',
             'content' => 'required',
-            'published_at' => 'required',
+            'published_at' => 'nullable',
         ]);
         News::create([
             'title' => $request->get('title'),
@@ -61,8 +64,9 @@ class NewsController extends Controller
             'url_image' => $request->get('url_image'),
             'description' => $request->get('description'),
             'content' => $request->get('content'),
-            'published_at' => $request->get('published_at')
+            'published_at' => $cosa
         ]);
+
 
         return back()->with('mensaje','Haz agregado una Noticia');
 

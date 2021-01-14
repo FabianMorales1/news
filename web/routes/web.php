@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 //routes for create and store
-Route::get('News/Agregar', 'App\Http\Controllers\NewsController@create');
-Route::post('News/Agregar', 'App\Http\Controllers\NewsController@store');
+Route::get('news/add', 'App\Http\Controllers\NewsController@create');
+Route::post('news/add', 'App\Http\Controllers\NewsController@store');

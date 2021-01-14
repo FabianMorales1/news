@@ -32,7 +32,7 @@
         </div>
     @endif
 
-    <form action="{{url('News/Agregar')}}" method="post">
+    <form action="{{url('news/add')}}" method="post">
         @csrf
         <div class="form-group">
             <label for="title">Titulo</label>
@@ -45,13 +45,13 @@
         </div>
         <br>
         <div class="form-group">
-            <label for="url">url</label>
+            <label for="url">url(ej. https://www.coindesk.com/podcasts/on-purpose-with-tyrone-ross/the-bitcoin-opportunity-is-right-here-in-america" )</label>
             <input type="text" class="form-control" name="url">
         </div>
 
         <br>
         <div class="form-group">
-            <label for="url_image">url(imagen)</label>
+            <label for="url_image">url(ej. https://static.coindesk.com/wp-content/uploads/2020/10/On-Purpose-Social_1200x628-1.jpg)</label>
             <input type="text" class="form-control" name="url_image">
         </div>
         <br>
@@ -64,26 +64,14 @@
             <label for="content">contenido</label>
             <input type="text" class="form-control" name="content">
         </div>
-        <div class="container">
-
-            <label for="published_at">published_at</label>
-
-            <input class="date form-control" type="text" name="published_at">
-
-
-        </div>
         <br>
-        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="submit" class="btn btn-primary">publicar</button>
     </form>
 </div>
-<script type="text/javascript">
-
-    $('.date').datepicker({
-
-        format: 'mm-dd-yyyy'
-
-    });
-
-</script>
 </body>
 </html>
+
+
+
+
+
