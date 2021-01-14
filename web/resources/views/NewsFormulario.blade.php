@@ -65,7 +65,7 @@
             <input type="text" class="form-control" name="content">
         </div>
         <br>
-        <button type="submit" class="btn btn-primary">publicar</button>
+        <button type="submit" class="btn btn-primary">PUBLICAR NOTICIA</button>
     </form>
 </div>
 </body>
