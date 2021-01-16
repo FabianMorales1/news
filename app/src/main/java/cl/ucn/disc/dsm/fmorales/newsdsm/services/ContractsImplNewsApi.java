@@ -36,7 +36,14 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.function.Function;
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
+import cl.ucn.disc.dsm.fmorales.newsdsm.model.NewsL;
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
 /**
@@ -132,6 +139,34 @@ public final class ContractsImplNewsApi implements Contracts {
                 // log.debug("Article: {}", ToStringBuilder.reflectionToString(article, ToStringStyle.MULTI_LINE_STYLE));
                 news.add(toNews(article));
             }
+            // Get the news from the api with retrofit the url is the ip of the host
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl("http://192.168.1.83:8101/api/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            Laravelapi lapi = retrofit.create(Laravelapi.class);
+            Call<List<NewsL>> call = lapi.getnewl();
+            call.enqueue(new Callback<List<NewsL>>() {
+                @Override
+                public void onResponse(Call<List<NewsL>> call, Response<List<NewsL>> response) {
+                    if(!response.isSuccessful()){
+                        //si hay un error solo se sale
+                        return;
+                    }
+                    List<NewsL> listaL = response.body();
+                    for(NewsL newsl:listaL){
+                        News A = new News(newsl.getTitle(),newsl.getAuthor(),newsl.getAuthor(),newsl.getUrl(),newsl.getUrlImage(),newsl.getDescription(),newsl.getContent(),newsl.getPublishedAt());
+                        news.add(A);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<NewsL>> call, Throwable t) {
+                    //si hay un error solo se sale
+                    return;
+                }
+
+            });
             return news.stream().filter(distinctById(News::getId))
                     .sorted((k1, k2) -> k2.getPublishedAt()
                             .compareTo(k1.getPublishedAt()))
