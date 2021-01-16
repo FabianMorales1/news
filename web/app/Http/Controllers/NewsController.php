@@ -46,7 +46,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
 
-        $cosa = Carbon::now()->format('Y-m-d\TH:i:s.ZZZZZZ\Z');
+        $cosa = Carbon::now()->format('Y-m-d H:i:s');
 
 
         $this->validate($request,[
