@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 List<News> listNews = contracts.retrieveNews(30);
 
                 // Stores the news from the news api into the local database
-                for (int i = 0; i < 21; i++) {
+                for (int i = 0; i < listNews.size()-1; i++) {
                     if (listNews.get(i) != null) {
                         db.newsDao().insert(listNews.get(i));
                     }
