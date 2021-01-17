@@ -41,7 +41,7 @@ public class News {
     /**
      * Unique id
      */
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
      long id;
 
     /**
@@ -122,6 +122,7 @@ public class News {
 
         // Validacion de publishedAt
         Validation.notNull(publishedAt, "title");
+
         this.id = LongHashFunction.xx().hashChars(title + "|" + source + "|" + author);
         this.title = title;
         this.source = source;
