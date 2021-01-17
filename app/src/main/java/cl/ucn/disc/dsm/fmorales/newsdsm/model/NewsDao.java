@@ -31,9 +31,9 @@ import java.util.List;
 public interface NewsDao {
 
     /**
-     * Get news from the local storage
+     * Get news from the local storage from newer to older
      */
-    @Query("SELECT * FROM news")
+    @Query("SELECT * FROM news ORDER BY publishedAt DESC ")
     List<News> getAll();
 
     /**
