@@ -63,8 +63,12 @@ public class MainActivity extends AppCompatActivity {
     private static final Logger log = LoggerFactory.getLogger(MainActivity.class);
 
     /**
+     * The SwipeRefresh reference
+     */
+    //private SwipeRefresh swipeRefreshLayout;
+
+    /**
      * OnCreate.
-     *
      * @param savedInstanceState used to reload the app.
      */
     @Override
@@ -86,6 +90,18 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(fastAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        // The SwipeRefresh Interactions
+        /*
+        swipeRefreshLayout = findViewById(R.id.swipelayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                //TODO: Poner método para actualizar las noticias. Preguntar a los chiquillos...
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        */
 
         // Create the local database to store the news
         AppDataBase db = Room.databaseBuilder(getApplicationContext(),

@@ -36,7 +36,7 @@
 
     <!--
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/am_swl_refresh"
+        android:id="@+id/swipelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     -->
