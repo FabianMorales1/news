@@ -25,8 +25,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -104,17 +106,32 @@ public class MainActivity extends AppCompatActivity {
               // Using the contracts to get the news
               ContractsImplNewsApi contracts = new ContractsImplNewsApi(
                   "ded30ff72b6a434caea6cd13ed35fda2");
+                if (isNetworkAvailable()) {
+                    // Get the news from internet
+                    List<News> newsList = contracts.retrieveNews(30);
 
-              // Get the news from internet
-              List<News> newsList = contracts.retrieveNews(30);
+                    // Set the adapter
+                    runOnUiThread(() -> {
+                        // clear the items
+                        newsAdapter.clear();
+                        // add the news items
+                        newsAdapter.add(newsList);
+                    });
+                }
+                else{
 
-              // Set the adapter
-              runOnUiThread(() -> {
-                // clear the items
-                newsAdapter.clear();
-                // add the news items
-                newsAdapter.add(newsList);
-              });
+                    Context context = getApplicationContext();
+                    CharSequence text = "Conexion a internet no disponible!";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    if (Looper.myLooper()==null){
+                        Looper.prepare();
+                    }
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+
+                }
             });
                fastAdapter.notifyDataSetChanged();
                swipeRefreshLayout.setRefreshing(false);
