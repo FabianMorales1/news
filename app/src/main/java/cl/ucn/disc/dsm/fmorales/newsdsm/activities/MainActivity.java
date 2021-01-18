@@ -35,6 +35,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ModelAdapter;
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             AsyncTask.execute(() -> {
 
               // Using the contracts to get the news
-              ContractsImplNewsAPIs contracts = new ContractsImplNewsAPIs(
+              ContractsImplNewsApi contracts = new ContractsImplNewsApi(
                   "ded30ff72b6a434caea6cd13ed35fda2");
 
               // Get the news from internet
