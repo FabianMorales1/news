@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The SwipeRefresh reference
      */
-    //private SwipeRefresh swipeRefreshLayout;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     /**
      * OnCreate.
@@ -92,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         // The SwipeRefresh Interactions
-        /*
         swipeRefreshLayout = findViewById(R.id.swipelayout);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -120,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
                swipeRefreshLayout.setRefreshing(false);
             }
         });
-        */
 
         // Create the local database to store the news
         AppDataBase db = Room.databaseBuilder(getApplicationContext(),
@@ -133,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
             // Delete all the news stored on the local database so they are replaced for the new ones
             if (isNetworkAvailable()) {
                 db.newsDao().deleteAll();
-
 
                 // Using the contracts to get the news ..
                 Contracts contracts = new ContractsImplNewsApi("ded30ff72b6a434caea6cd13ed35fda2");

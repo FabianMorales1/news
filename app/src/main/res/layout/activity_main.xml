@@ -8,13 +8,9 @@
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-
-
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
 
         <com.google.android.material.appbar.MaterialToolbar
 
@@ -33,23 +29,17 @@
             app:title="@string/title"--> @FIX ME "Title and subtitle"
     </com.google.android.material.appbar.AppBarLayout>
 
-
-    <!--
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipelayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    -->
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/am_rv_news"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical" />
 
-    <!--
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-    -->
-
-
 
 </LinearLayout>
