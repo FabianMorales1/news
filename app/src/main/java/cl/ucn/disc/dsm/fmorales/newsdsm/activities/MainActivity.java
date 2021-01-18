@@ -97,8 +97,27 @@ public class MainActivity extends AppCompatActivity {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                //TODO: Poner método para actualizar las noticias. Preguntar a los chiquillos...
-                swipeRefreshLayout.setRefreshing(false);
+
+            // Get the news in the background thread
+            AsyncTask.execute(() -> {
+
+              // Using the contracts to get the news
+              ContractsImplNewsAPIs contracts = new ContractsImplNewsAPIs(
+                  "ded30ff72b6a434caea6cd13ed35fda2");
+
+              // Get the news from internet
+              List<News> newsList = contracts.retrieveNews(30);
+
+              // Set the adapter
+              runOnUiThread(() -> {
+                // clear the items
+                newsAdapter.clear();
+                // add the news items
+                newsAdapter.add(newsList);
+              });
+            });
+               fastAdapter.notifyDataSetChanged();
+               swipeRefreshLayout.setRefreshing(false);
             }
         });
         */
