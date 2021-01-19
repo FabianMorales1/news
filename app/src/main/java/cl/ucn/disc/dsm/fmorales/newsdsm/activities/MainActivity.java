@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Create the local database to store the news
         AppDataBase db = Room.databaseBuilder(getApplicationContext(),
-                AppDataBase.class, "localNewsDb").build();
+                AppDataBase.class, "localNewsDb").allowMainThreadQueries().build();
 
         // Get the news in the background thread
         AsyncTask.execute(() -> {
@@ -171,8 +171,9 @@ public class MainActivity extends AppCompatActivity {
                 // If the app doest detect an internet connection
                 // Show the list of news from the local database
             } else {
-                Thread t = new Thread(() -> newsAdapter.add(db.newsDao().getAll()));
-                t.start();
+                runOnUiThread(() -> {
+                newsAdapter.add(db.newsDao().getAll());
+                });
             }
         });
     }
