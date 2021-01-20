@@ -39,6 +39,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.mikepenz.fastadapter.FastAdapter;
 import com.mikepenz.fastadapter.adapters.ModelAdapter;
 
@@ -80,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Initialize the Fresco tool for loading images on the app
+        Fresco.initialize(this);
 
         // The toolbar
         this.setSupportActionBar(findViewById(R.id.am_t_toolbar));

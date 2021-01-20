@@ -20,13 +20,20 @@
 
 package cl.ucn.disc.dsm.fmorales.newsdsm.activities;
 
+import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.mikepenz.fastadapter.items.ModelAbstractItem;
+
 import org.threeten.bp.format.DateTimeFormatter;
+
 import java.util.List;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.R;
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
@@ -40,6 +47,8 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
      * The ZonedDateTime formatter.
      */
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm d.LLL.yyyy");
+
+
 
     /**
      * The Constructor.
@@ -91,6 +100,8 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
         holder.source.setText(getModel().getSource());
         holder.description.setText(getModel().getDescription());
         holder.publishedAt.setText(FORMATTER.format(getModel().getPublishedAt()));
+        holder.imageUrl.setImageURI(Uri.parse(getModel().getUrlImage()));
+
     }
 
     /**
@@ -116,6 +127,9 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
         protected TextView source;
         protected TextView description;
         protected TextView publishedAt;
+        protected SimpleDraweeView imageUrl;
+
+
         public ViewHolder(@NonNull View view) {
             super(view);
             this.title = view.findViewById(R.id.in_tv_title);
@@ -123,6 +137,8 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
             this.source = view.findViewById(R.id.in_tv_source);
             this.description = view.findViewById(R.id.in_tv_description);
             this.publishedAt = view.findViewById(R.id.in_tv_published_at);
+            this.imageUrl = view.findViewById(R.id.in_tv_url_image);
+
         }
     }
 }
