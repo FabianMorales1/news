@@ -11,19 +11,19 @@
 
 <resources>
     <color name="green_0">#FFFFFF</color>
-    <color name="green_50">#E8F5E9</color>
-    <color name="green_100">#C8E6C9</color>
-    <color name="green_200">#A5D6A7</color>
-    <color name="green_300">#81C784</color>
-    <color name="green_400">#66BB6A</color>
-    <color name="green_500">#4CAF50</color>
-    <color name="green_600">#43A047</color>
-    <color name="green_700">#388E3C</color>
-    <color name="green_800">#2E7D32</color>
-    <color name="green_900">#1B5E20</color>
-    <color name="green_1000">#123e15</color>
-    <color name="green_1100">#0f2d11</color>
-    <color name="green_1200">#0a1e0b</color>
-    <color name="green_1300">#040a04</color>
+    <color name="green_50">#DAD4E7</color>
+    <color name="green_100">#B6ABCE</color>
+    <color name="green_200">#9184B7</color>
+    <color name="green_300">#6D5E9F</color>
+    <color name="green_400">#483A87</color>
+    <color name="green_500">#392F5B</color>
+    <color name="green_600">#322862</color>
+    <color name="green_700">#282169</color>
+    <color name="green_800">#191970</color>
+    <color name="green_900">#1A165D</color>
+    <color name="green_1000">#19144A</color>
+    <color name="green_1100">#171139</color>
+    <color name="green_1200">#140D28</color>
+    <color name="green_1300">#0E0618</color>
     <color name="green_1400">#000000</color>
 </resources>
