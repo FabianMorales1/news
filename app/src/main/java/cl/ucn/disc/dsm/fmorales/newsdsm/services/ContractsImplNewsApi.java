@@ -121,7 +121,7 @@ public final class ContractsImplNewsApi implements Contracts {
     }
 
     /**
-     * Get the list of News.
+     * Get the list of News from news api and laravel server.
      * @param size of the list.
      * @return the List of News.
      */
@@ -147,6 +147,12 @@ public final class ContractsImplNewsApi implements Contracts {
             Laravelapi lapi = retrofit.create(Laravelapi.class);
             Call<List<NewsL>> call = lapi.getnewl();
             call.enqueue(new Callback<List<NewsL>>() {
+                /**
+                 * save the response code given from the server
+                 * if the code is 200 the news are saved to the news list
+                 * @param call is the call from de app to the server laravel.
+                 * @param response the response code and the news of the server laravel.
+                 */
                 @Override
                 public void onResponse(Call<List<NewsL>> call, Response<List<NewsL>> response) {
                     if(!response.isSuccessful()){
@@ -160,6 +166,11 @@ public final class ContractsImplNewsApi implements Contracts {
                     }
                 }
 
+                /**
+                 *   all error that ar not responses form the server are catched in this function
+                 * @param call  is the call from de app to the server laravel.
+                 * @param t error catch
+                 */
                 @Override
                 public void onFailure(Call<List<NewsL>> call, Throwable t) {
                     //si hay un error solo se sale
