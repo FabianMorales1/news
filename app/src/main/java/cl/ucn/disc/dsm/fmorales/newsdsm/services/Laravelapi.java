@@ -18,7 +18,7 @@ import retrofit2.http.GET;
 
 public interface Laravelapi {
 
-    //in url is de route for the api consume
+    //part of the url, is de route for the api consume
     @GET("thenews/pageSize")
     Call<List<NewsL>> getnewl();
 }
