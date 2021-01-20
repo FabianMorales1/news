@@ -100,4 +100,7 @@ dependencies {
 
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
 
+    // Fresco Tool (Image loader)
+    implementation 'com.facebook.fresco:fresco:2.3.0'
+
 }
