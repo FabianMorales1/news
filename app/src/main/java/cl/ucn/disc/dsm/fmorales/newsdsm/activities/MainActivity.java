@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * OnCreate.
+     *
      * @param savedInstanceState used to reload the app.
      */
     @Override
@@ -100,41 +101,40 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
 
-            // Get the news in the background thread
-            AsyncTask.execute(() -> {
+                // Get the news in the background thread
+                AsyncTask.execute(() -> {
 
-              // Using the contracts to get the news
-              ContractsImplNewsApi contracts = new ContractsImplNewsApi(
-                  "ded30ff72b6a434caea6cd13ed35fda2");
-                if (isNetworkAvailable()) {
-                    // Get the news from internet
-                    List<News> newsList = contracts.retrieveNews(30);
+                    // Using the contracts to get the news
+                    ContractsImplNewsApi contracts = new ContractsImplNewsApi(
+                            "ded30ff72b6a434caea6cd13ed35fda2");
+                    if (isNetworkAvailable()) {
+                        // Get the news from internet
+                        List<News> newsList = contracts.retrieveNews(30);
 
-                    // Set the adapter
-                    runOnUiThread(() -> {
-                        // clear the items
-                        newsAdapter.clear();
-                        // add the news items
-                        newsAdapter.add(newsList);
-                    });
-                }
-                else{
+                        // Set the adapter
+                        runOnUiThread(() -> {
+                            // clear the items
+                            newsAdapter.clear();
+                            // add the news items
+                            newsAdapter.add(newsList);
+                        });
+                    } else {
 
-                    Context context = getApplicationContext();
-                    CharSequence text = "Conexion a internet no disponible!";
-                    int duration = Toast.LENGTH_SHORT;
+                        Context context = getApplicationContext();
+                        CharSequence text = "Conexion a internet no disponible!";
+                        int duration = Toast.LENGTH_SHORT;
 
-                    if (Looper.myLooper()==null){
-                        Looper.prepare();
+                        if (Looper.myLooper() == null) {
+                            Looper.prepare();
+                        }
+
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+
                     }
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();
-
-                }
-            });
-               fastAdapter.notifyDataSetChanged();
-               swipeRefreshLayout.setRefreshing(false);
+                });
+                fastAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 List<News> listNews = contracts.retrieveNews(30);
 
                 // Stores the news from the news api into the local database
-                for (int i = 0; i < listNews.size()-1; i++) {
+                for (int i = 0; i < listNews.size() - 1; i++) {
                     if (listNews.get(i) != null) {
                         db.newsDao().insert(listNews.get(i));
                     }
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
                 // Show the list of news from the local database
             } else {
                 runOnUiThread(() -> {
-                newsAdapter.add(db.newsDao().getAll());
+                    newsAdapter.add(db.newsDao().getAll());
                 });
             }
         });
