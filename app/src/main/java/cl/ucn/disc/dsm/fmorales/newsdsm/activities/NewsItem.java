@@ -39,6 +39,7 @@ import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
 /**
  * The NewsItem to show in the list.
+ *
  * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.ViewHolder> {
@@ -49,9 +50,9 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("HH:mm d.LLL.yyyy");
 
 
-
     /**
      * The Constructor.
+     *
      * @param news to show.
      */
     public NewsItem(@NonNull News news) {
@@ -69,7 +70,8 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
     }
 
     /**
-     *  get the type of the news
+     * get the type of the news
+     *
      * @return type of the news
      */
     @Override
@@ -87,7 +89,8 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
 
     /**
      * Bind the holder with the model.
-     * @param holder	to use.
+     *
+     * @param holder   to use.
      * @param payloads ?.
      */
     @Override
@@ -100,12 +103,16 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
         holder.source.setText(getModel().getSource());
         holder.description.setText(getModel().getDescription());
         holder.publishedAt.setText(FORMATTER.format(getModel().getPublishedAt()));
-        holder.imageUrl.setImageURI(Uri.parse(getModel().getUrlImage()));
 
+        //Verify that the url of the image is not null
+        if(getModel().getUrlImage() != null){
+            holder.imageUrl.setImageURI(Uri.parse(getModel().getUrlImage()));
+        }
     }
 
     /**
      * Clear the holder.
+     *
      * @param holder to clean.
      */
     @Override
@@ -128,7 +135,6 @@ public final class NewsItem extends ModelAbstractItem<News, NewsItem, NewsItem.V
         protected TextView description;
         protected TextView publishedAt;
         protected SimpleDraweeView imageUrl;
-
 
         public ViewHolder(@NonNull View view) {
             super(view);
