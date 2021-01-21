@@ -21,12 +21,14 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import com.kwabenaberko.newsapilib.models.Article;
+
 import org.apache.commons.lang3.NotImplementedException;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.threeten.bp.ZoneId;
 import org.threeten.bp.ZonedDateTime;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.function.Function;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.NewsL;
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
@@ -48,6 +51,7 @@ import static org.apache.commons.lang3.builder.ToStringStyle.MULTI_LINE_STYLE;
 
 /**
  * The ContractsImplNewsApi Class
+ *
  * @author Fabian Morales, Felipe Herrera, Diego Duarte
  */
 public final class ContractsImplNewsApi implements Contracts {
@@ -64,6 +68,7 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * The Constructor.
+     *
      * @param theApiKey to use.
      */
     public ContractsImplNewsApi(final String theApiKey) {
@@ -73,6 +78,7 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * The Assembler/Transformer pattern!
+     *
      * @param article used to source
      * @return the News.
      */
@@ -122,6 +128,7 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * Get the list of News from news api and laravel server.
+     *
      * @param size of the list.
      * @return the List of News.
      */
@@ -147,6 +154,7 @@ public final class ContractsImplNewsApi implements Contracts {
             Laravelapi lapi = retrofit.create(Laravelapi.class);
             Call<List<NewsL>> call = lapi.getnewl();
             call.enqueue(new Callback<List<NewsL>>() {
+
                 /**
                  * save the response code given from the server
                  * if the code is 200 the news are saved to the news list
@@ -155,13 +163,13 @@ public final class ContractsImplNewsApi implements Contracts {
                  */
                 @Override
                 public void onResponse(Call<List<NewsL>> call, Response<List<NewsL>> response) {
-                    if(!response.isSuccessful()){
+                    if (!response.isSuccessful()) {
                         //si hay un error solo se sale
                         return;
                     }
                     List<NewsL> listaL = response.body();
-                    for(NewsL newsl:listaL){
-                        News A = new News(newsl.getTitle(),newsl.getAuthor(),newsl.getAuthor(),newsl.getUrl(),newsl.getUrlImage(),newsl.getDescription(),newsl.getContent(),newsl.getPublishedAt());
+                    for (NewsL newsl : listaL) {
+                        News A = new News(newsl.getTitle(), newsl.getAuthor(), newsl.getAuthor(), newsl.getUrl(), newsl.getUrlImage(), newsl.getDescription(), newsl.getContent(), newsl.getPublishedAt());
                         news.add(A);
                     }
                 }
@@ -191,6 +199,7 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * Filter the stream
+     *
      * @param idExtractor
      * @param <T>
      * @return true if the news already exists.
@@ -202,6 +211,7 @@ public final class ContractsImplNewsApi implements Contracts {
 
     /**
      * Save one News into the System.
+     *
      * @param news to save.
      */
     @Override

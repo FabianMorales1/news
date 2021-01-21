@@ -24,15 +24,18 @@ import com.kwabenaberko.newsapilib.models.Article;
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 import com.kwabenaberko.newsapilib.network.APIClient;
 import com.kwabenaberko.newsapilib.network.APIService;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.utils.Validation;
 import retrofit2.Response;
 
 /**
  * The NewApiService Class
+ *
  * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public final class NewsApiService {
@@ -49,6 +52,7 @@ public final class NewsApiService {
 
     /**
      * The Constructor.
+     *
      * @param apiKey to use.
      */
     public NewsApiService(String apiKey) {
@@ -59,6 +63,7 @@ public final class NewsApiService {
 
     /**
      * The getTopHeadLines adaptor.
+     *
      * @param category to search.
      * @return the List of Article.
      * @throws IOException in case of error.

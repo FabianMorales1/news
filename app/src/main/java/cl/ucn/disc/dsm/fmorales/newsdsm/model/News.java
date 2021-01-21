@@ -42,7 +42,7 @@ public class News {
      * Unique id
      */
     @PrimaryKey()
-     long id;
+    long id;
 
     /**
      * The Title

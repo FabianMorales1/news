@@ -21,16 +21,19 @@
 package cl.ucn.disc.dsm.fmorales.newsdsm.services;
 
 import java.util.List;
+
 import cl.ucn.disc.dsm.fmorales.newsdsm.model.News;
 
 /**
  * The Contracts from CU/UH.
+ *
  * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public interface Contracts {
 
     /**
      * Get the list of news
+     *
      * @param size size of the list
      * @return the list of news
      */
@@ -38,6 +41,7 @@ public interface Contracts {
 
     /**
      * Save one News into the system.
+     *
      * @param news to save
      */
     List<News> save(News ntc);

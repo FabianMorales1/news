@@ -35,6 +35,7 @@ import static org.threeten.bp.ZoneOffset.UTC;
 
 /**
  * The Faker implementation of {@link Contracts}
+ *
  * @author Fabian Morales, Felipe Herrera, Diego Duarte.
  */
 public class ContractsImplFaker implements Contracts {
@@ -65,6 +66,7 @@ public class ContractsImplFaker implements Contracts {
 
     /**
      * Get the list of news
+     *
      * @param size size of the list
      * @return the list of news
      */
@@ -76,6 +78,7 @@ public class ContractsImplFaker implements Contracts {
 
     /**
      * Save one News into the System
+     *
      * @param news to save
      */
     public List<News> save(News ntc) {
